@@ -1,4 +1,4 @@
-﻿using System; 
+using System; 
 using System.ComponentModel.DataAnnotations; 
 using System.Web.Mvc;
 
@@ -30,6 +30,16 @@ namespace IDSync.ApiModels
         [Required(ErrorMessage = "SharepointURL is required")]
         public string SharepointURL { get; set; }
         [Required(ErrorMessage = "Group is required")]
+        public string Group { get; set; }
+    }
+
+    public class SharePointSaveModel
+    {
+        [Key]
+        [Required(ErrorMessage = "SamAccountName is required")]
+        [StringLength(256, MinimumLength = 0, ErrorMessage = "SamAccountName must be between 0 and 256 characters.")]
+        public string SamAccountName { get; set; }
+        public string SharepointURL { get; set; }
         public string Group { get; set; }
     }
 }
