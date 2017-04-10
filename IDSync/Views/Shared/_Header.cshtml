@@ -1,0 +1,183 @@
+﻿@{ 
+    string apiUrl = System.Configuration.ConfigurationManager.AppSettings["ids:ApiUrl"];
+    string apiKey = System.Configuration.ConfigurationManager.AppSettings["ids:ApiKey"];
+    string apiToken = System.Configuration.ConfigurationManager.AppSettings["ids:ApiToken"];
+    string role = "";
+    foreach (var m in ViewBag.context.MemberOf.Split('#'))
+    {
+        if (m != "")
+        {
+            string[] x_ = m.Split(',');
+            string Name = x_[0].Replace("CN=", "");
+            string OU = m.Replace(Name + ",", "");
+            if (Name.ToLower().Contains("idsync"))
+            {
+                role = Name.Replace("IDSync","");
+            }
+        }
+    }
+}
+<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize btn btn-primary" href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+            <div class="form-group-search">
+                <input type="text" name="awesome-search" id="aoc-ajax-post" placeholder="@IDSync.Resources.HomeTexts.Search..." />
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+        <ul class="nav navbar-top-links navbar-right hidden-xs">
+            <li class="natural-icon">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void(0)" onclick="showList();">
+                    <i class="fa fa-bell-o"><sup id="num-no"></sup></i>
+                </a>
+                <ul class="dropdown-menu dropdown-messages animated fadeInDown m-t-xs" id="content-notice">
+                    <li class="arrow-up"></li>
+                    <li>
+                        <center>Loading...</center>
+                    </li>
+                </ul>
+            </li>
+         <li class="natural-icon border-right">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void(0)">
+                    <i class="fa fa-th"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-ysi-apps animated fadeInDown m-t-xs" id="content-apps">
+                    <li class="arrow-up"></li> 
+                </ul>
+            </li>
+            <li>
+                <div class="dropdown keep-open profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="margin-top:10px;color:#555">
+                        @if (IDSync.Configs.MainConfig.Conf("EnableSkype").ToString() == "true")
+                        {
+                        <span id="my-presence"></span>
+                        }
+                        <img style="width:35px; height:35px; margin-top:5px;" class="img-profile" id="top-imagex" src="/Api/GetPhoto/?mail=@ViewBag.context.EmailAddress" alt="">
+                        <span class="pull-right">
+                            <i class="fa fa-angle-down"></i>
+                        </span>
+                        <span class="pull-right">
+                            <span class="block">@ViewBag.context.DisplayName</span>
+                            <span class="block"><b>(Role)</b> @role </span>
+                        </span> 
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-account animated fadeInDown m-t-xs">
+                        <li class="arrow-up"></li> 
+                        @if (IDSync.Configs.MainConfig.Conf("EnableSkype").ToString() == "true")
+                        {
+                        <li id="noprevent">
+                            <span class="pull-left">Status</span>
+                            <span class="pull-right" id="SDKSkypeMe">
+                                <select id="sel-presence" class="secondary">
+                                    <option value="Online">Available</option>
+                                    <option value="Busy">Busy</option>
+                                    <option value="DoNotDisturb">Do not disturb</option>
+                                    <option value="BeRightBack">Be right back</option>
+                                    <option value="Away">Appear away</option>
+                                </select>
+                                <script type="text/javascript">
+                                        $('select#sel-presence').change(function () {
+                                            $('.dropdown.keep-open').removeClass('open')
+                                        });
+                                </script>
+                            </span>
+                        </li>
+                        <li class="divider"></li>
+                        }
+                        <li class="link-hide"><a ajax="true" href="#!/Account/Details/" url-push="true" ajax-target=".x-right">@IDSync.Resources.HomeTexts.My_Profile</a></li>
+                        <li class="link-hide">
+                            <a ajax="true" ajax-target="modalbody" modal-width="800px" modal-fix="false" url-push="false" href="#!/Account/Edit">@IDSync.Resources.HomeTexts.Edit_Profile</a>
+                        </li>
+                        <li class="link-hide">
+                            <a ajax="true" ajax-target="modalbody" modal-width="400px" modal-fix="false" url-push="false" href="#!/Account/Password">@IDSync.Resources.HomeTexts.Change_Password</a>
+                        </li>
+                        <li class="link-hide"><a href="~/Account/Logout">@IDSync.Resources.HomeTexts.Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
+</div>
+<script type="text/javascript">
+    $('.dropdown.keep-open').on({
+        "shown.bs.dropdown": function () { this.closable = false; },
+        "click": function () { this.closable = false; },
+        "mouseleave": function () { this.closable = true; },
+        "hide.bs.dropdown": function () { return this.closable; }
+    });
+
+    $('ul.dropdown-menu-account li.link-hide a').click(function () {
+        $('.dropdown.keep-open').removeClass('open')
+    });
+    $(document).ready(function () {
+        $("#aoc-ajax-post").autocomplete({
+            source: "/AwesomeSearch/AutoComplete/",
+            minLength: 2,
+            select: function (event, ui) {
+                searchAwesome(ui.item.value);
+            }
+        });
+    })
+    // num List
+    function numList() {
+        $.ajax({
+            type: "GET",
+            url: "/Notice/Number",
+            success: function (rs) {
+                obj = JSON.parse(rs);
+                $('#num-no').html(obj.number);
+                var cl_ = $('#num-no');
+                var new_num = parseInt(obj.number);
+                if (new_num > 0) {
+                    cl_.addClass("label-danger");
+                } else {
+                    cl_.removeClass("label-danger");
+                    cl_.html('');
+                }
+            }
+        });
+    }
+    numList();
+    setInterval(function () {
+        numList();
+    }, 50000);
+
+    function showList() {
+        $.ajax({
+            type: "GET",
+            beforeSend: function () {
+                $('#content-notice').html('<center>Loading...</center>');
+            },
+            url: "/Notice/Show",
+            success: function (rs) {
+                $('#content-notice').html(rs);
+                $.ajax({
+                    type: "GET",
+                    url: "/Notice/SetNull",
+                    success: function (rs) {
+                        $('#num-no').removeClass("label-danger").html('');
+                    }
+                });
+            }
+        });
+    } 
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "@apiUrl/Api/GetApps/?key=@apiKey&token=@apiToken&email=@ViewBag.context.EmailAddress",
+            //contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var li = "<li class='arrow-up'></li> ";
+                $.each(msg, function (i, item) {
+                    li += "<li class='block'><a target='_blank' title='" + msg[i].Name + "' href='" + msg[i].WebEndPoint + "'><img src='@apiUrl/" + msg[i].Photo + "' /><span>" + msg[i].Name + "</span></li>";
+                })
+                $('#content-apps').prepend(li);
+            }
+        });
+    });
+
+</script>

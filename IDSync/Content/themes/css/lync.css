@@ -1,0 +1,132 @@
+﻿ /**CHAT*/
+ @media (max-width: 480px) {  
+    #toogle-app-chat{
+        display:none;
+    }
+   
+    #right-sidebar, .chatbox{
+        display:none !important;
+    }
+}
+ 
+ /**Presence*/
+ #my-presence {
+    background: #000;
+    color: #fff;
+    width: 4px;
+    height: 35px;
+    float: left;
+    font-size: 12px;
+    top: 5px;
+    left: 10px;
+    position: relative;
+}
+
+ #toogle-app-chat{
+     position:fixed;
+     right:0px;
+     bottom:0px; 
+     z-index:1000;
+ }
+
+ #toogle-app-chat a{
+    background: #2f4050;
+    color: #fff;
+    padding: 1px 7px;
+    font-size: 18px;
+    float: left;
+}
+.skype-panel {
+    list-style:none;
+    margin:0px;
+    padding:18px 0px 0px 0px;
+    display:block; 
+    float:left;
+    width:260px;
+} 
+.skype-panel ul.child-block{
+    padding:0px;
+    float:left;
+    margin:0px;
+    width:260px;
+}
+.skype-panel li{ 
+    float:left;
+    width:100%;
+}
+.skype-panel li h3{  
+    font-weight: bold;
+    background: #f3f3f4;
+    padding: 10px 20px;
+    margin: 0px;
+}
+.skype-panel li.m{
+    margin:0px!important;
+    padding: 0px !important;
+}
+.skype-panel li a{  
+    text-decoration:none; 
+    display:block;
+    padding:5px;
+    border-bottom: 1px dotted #ccc;
+
+}
+.skype-panel li a img{
+    float:left;
+    width:40px;
+    height:35px;
+    margin-right:10px;
+}
+
+.skype-panel li a span.listUC-block{
+    display:block;
+    font-size:12px;
+    color:#777;
+}
+ div#lync-user-search {
+    position: fixed;
+    bottom: 0px; 
+    width:100%;
+    float:left;
+    background:#f6f6f6;
+    padding:2px;
+    border-top:1px solid #ccc;
+}
+  div#lync-user-search input{
+      border: 1px solid #ccc;
+      padding:1px 4px;
+      position:relative;
+      width:100%;
+      padding-left:25px;
+  }
+  div#lync-user-search i.fa{
+      position:absolute;
+      left:10px;
+      z-index:10;
+      top:7px;
+      background:#f8f8f8;
+  }
+
+  li .fix-spot{
+    width: 10px;
+    height: 10px;
+    position: relative;
+    top: -20px;
+    right:10px;
+    background:#ccc;
+    border-radius:50%;
+  } 
+
+  .presenceActive, .presenceInActive{ 
+      width: 6px;
+    height: 6px;
+    float: left;
+    position: relative;
+    top: 5px; 
+    left: 0px;
+    border-radius: 50%;
+    background-color:#000;
+  }
+  .presenceActive{
+      background-color: #55E855;
+  }

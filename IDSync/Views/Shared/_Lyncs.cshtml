@@ -1,0 +1,29 @@
+﻿<div id="right-sidebar">
+    <div class="sidebar-container">  
+        <div id="lyncs-user-list">   
+        </div> 
+        <div id="lync-user-search">
+            <i class="fa fa-search"></i><input type="text" placeholder="Find.." id="skype-user-search" />
+        </div>
+    </div>
+</div>  
+<div id="toogle-app-chat">
+    <a href="javascript:void(0);" class="right-sidebar-toggle"><i class="fa fa-comments"></i></a>
+</div>
+
+<script type="text/javascript"> 
+    $('input#skype-user-search').keypress(function () {
+        var that = this,
+        value = $(this).val();
+
+        if (value.length >= 3) {
+            $(".skype-panel li h3").hide();
+            $(".skype-panel li .hideMe:contains('" + value.toLocaleLowerCase() + "')").parent().show();
+            $(".skype-panel li .hideMe:not(:contains('" + value.toLocaleLowerCase() + "'))").parent().hide();
+        } else {
+            $(".skype-panel li").show();
+            $(".skype-panel li h3").show();
+        } 
+        
+    })
+</script>

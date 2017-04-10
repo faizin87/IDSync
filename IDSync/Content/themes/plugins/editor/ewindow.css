@@ -1,0 +1,101 @@
+
+iframe#x-editor-iframe{
+    width: auto;
+}
+
+.x-editor-body, .x-editor-body p, .x-editor-footer, .x-editor-footer p{
+    float: left;
+    width: 100%;
+    margin: 0px;
+    padding-top: 5px;
+} 
+.x-editor-footer {
+    text-align: right;
+}
+.x-editor-body p label{
+    float: left;
+    width: 25%;
+    padding: 6px 2%; 
+
+}
+.x-editor-footer p{
+    text-align: right;
+    border-top: 1px solid #ddd;
+    padding: 5px 0;
+    float: left;
+}
+
+.x-editor-body *[tab-parent], .x-editor-body .tab{
+    width: 99%;
+    position: relative; 
+    border-bottom: 1px solid #ccc;
+    text-align: right;
+    margin-bottom: 5px;
+}
+.x-editor-body .tab a#e-icon-header{
+    float: left;
+    margin: 0px;
+    border: none;
+    text-decoration: none;
+    color: #2693ba;
+    padding: 5px 0px 0px 5px;
+}
+
+.x-editor-body p input[type="text"], .x-editor-body p textarea, .x-editor-body p select{
+    float: left;
+    width: 96%;
+    font-size: 14px;
+    padding: 6px;
+    border: 1px solid #ccc;
+} 
+.x-editor-body p select{
+    padding: 5px;
+}
+.x-editor-btn{
+    padding: 4px 7px;
+    background-color: #50b7dc;
+    background-image: -moz-linear-gradient(top, #50b7dc, #279ac2);
+    background-image: -ms-linear-gradient(top, #50b7dc, #279ac2);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#50b7dc), to(#279ac2));
+    background-image: -webkit-linear-gradient(top, #50b7dc, #279ac2);
+    background-image: -o-linear-gradient(top, #50b7dc, #279ac2);
+    background-image: linear-gradient(top, #50b7dc,#279ac2);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#29a1cb', endColorstr='#2797be', GradientType=0);
+    border-color: #279ac2 #279ac2 #1b6883;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    text-decoration: none;
+    border: 1px solid rgba(42,164,207,0.5);
+    display: inline;
+    color: #fff;
+    margin: 2px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+ul#x-s-track{
+    float: left;
+    width: 97%;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+#e-atarget{
+    float: left;
+    width: 100%;
+}
+ul#x-s-track li{
+    float: left;
+    width: 100%;
+}
+ul#x-s-track li a{
+    float: left;
+    width: 97%;
+    padding: 5px;
+    text-decoration: none;
+    color: #666;
+    padding-left: 20px;
+    border-bottom: 1px solid #ccc;
+    background: url('../Private/editor/soundcloud.png') left no-repeat;
+}

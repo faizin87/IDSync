@@ -1,0 +1,42 @@
+﻿@{ 
+    var selectLang = System.Threading.Thread.CurrentThread.CurrentCulture.ToString().ToLower();
+}
+<div class="footer">
+    <div class="pull-right">
+        <div class="fot-div">
+            <i class="fa fa-clock-o"></i> <span class="clock"></span>
+        </div>
+        <div class="dd-language">
+            <select name="language">
+                <option value="En" @((selectLang == "en") ? "selected" : "")>English</option>
+                <option value="Id" @((selectLang=="id") ? "selected"  : "")>Indonesia</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <div class="fot-div">
+            <strong>Copyright</strong> PT Yafii Solusi Internasional &copy; 2016
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('select[name="language"]').combobox({
+            selected: function (event, ui) {
+                var Id = ui.item.value;
+                $.ajax({
+                    beforeSend: function () {
+                        loading();
+                    },
+                    type: "GET",
+                    url: "/Language/Change/?lang=" + Id,
+                    success: function (rs) {
+                        close_box();
+                        var _url = window.location.hash; 
+                        location.reload();
+                    }
+                });
+            }
+        });
+    });
+</script>

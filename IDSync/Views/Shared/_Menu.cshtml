@@ -1,0 +1,183 @@
+﻿@using IDSync.Configs;
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse" id="side-menu">
+        <ul class="nav metismenu">
+            <li class="nav-header" id="in-logo">
+                <p>
+                    <img src="~/Images/logo/176.png" />
+                </p>
+            </li>
+            <li class="nav-header" id="in-sm-logo" style="display:none;">
+                <p>
+                    <img src="~/Images/series/idsync.png" />
+                </p>
+            </li>
+            @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Home/Index"))
+            {
+            <li>
+                <a ajax="true" ajax-title="@IDSync.Resources.HomeTexts.Dashboard - IDSync+" ajax-target=".x-right" url-push="true" href="#!/Home/Welcome"><i class="fa fa-windows"></i> <span class="nav-label">@IDSync.Resources.HomeTexts.Dashboard</span></a>
+            </li>
+            }
+            @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "ActiveDirectory/Index"))
+            {
+            <li>
+                <a href="#"><i class="fa fa-folder-open"></i> <span class="nav-label">Active Directory<sup> WebApp</sup></span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ajax-title="@IDSync.Resources.HomeTexts.Active_Directory_Users" ajax="true" ajax-target=".x-right" url-push="true" href="#!/ActiveDirectory/Index">@IDSync.Resources.HomeTexts.Users</a></li>
+                    <li><a ajax-title="@IDSync.Resources.HomeTexts.Active_Directory_Groups" ajax="true" ajax-target=".x-right" url-push="true" href="#!/ActiveDirectory/Index/?type=1">@IDSync.Resources.HomeTexts.Groups</a></li>
+                </ul>
+            </li>
+            }
+            @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Federation/Index"))
+            {
+            <li>
+                <a href="#"><i class="fa fa-cloud"></i> <span class="nav-label">Application</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ajax-title="Federation - SSO Management" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Federation/Index/">Relaying Party</a></li>
+                    <li><a ajax-title="Web Service - SSO Management" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Api/Service">Web Service</a></li>
+                </ul>
+            </li>
+            }
+            @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Skype/Index") || IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Exchange/Index") || IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Sharepoint/Index"))
+            {
+            <li>
+                <a href="#"><i class="fa fa-magic"></i> <span class="nav-label">@IDSync.Resources.HomeTexts.Provisioning</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Exchange/Index"))
+                    {
+                    <li class="menu-exchange"><a ajax-title="Exchange" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Exchange/Index">Exchange</a></li>
+                    }
+                    @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Skype/Index"))
+                    {
+                    <li class="menu-skype"><a ajax-title="Skype" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Skype/Index">Skype</a></li>
+                    }
+                    @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Sharepoint/Index"))
+                    {
+                    <li class="menu-sharepoint"><a ajax-title="SharePoint" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Sharepoint/Index">SharePoint</a></li>
+                    }
+                </ul>
+            </li>
+            }
+            @if (IDSync.Helpers.AuthHelpers.IsAllow(User.Identity.Name, "Apps/Index"))
+            {
+            <li>
+                <a href="#"><i class="fa fa-connectdevelop"></i> <span class="nav-label">Sync Apps </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ajax-title="Apps - @IDSync.Resources.HomeTexts.Connection" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Apps/Index">@IDSync.Resources.HomeTexts.Connection</a></li>
+                    <li><a ajax-title="Apps - @IDSync.Resources.HomeTexts.Syncronize" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Apps/Sync">@IDSync.Resources.HomeTexts.Syncronize</a></li>
+                </ul>
+            </li>
+            }
+            @{if (IDSync.Helpers.AuthHelpers.IsAdmin(User.Identity.Name))
+                {
+
+                <li>
+                    <a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">@IDSync.Resources.HomeTexts.Configuration</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a ajax-title="System" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Setting/Index"><i class="fa fa-star"></i>@IDSync.Resources.HomeTexts.System</a></li>
+                        <li><a ajax-title="@IDSync.Resources.HomeTexts.Title - IDSync+" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Title/Index">@IDSync.Resources.HomeTexts.Title</a></li>
+                        <li><a ajax-title="@IDSync.Resources.HomeTexts.Organization_Unit - IDSync+" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Ou/Index">@IDSync.Resources.HomeTexts.Organization_Unit</a></li>
+                        <li><a ajax-title="@IDSync.Resources.HomeTexts.Link_Access - IDSync+" ajax="true" ajax-target=".x-right" url-push="true" href="#!/AuthLink/Index">@IDSync.Resources.HomeTexts.Link_Access</a></li>
+                        <li><a ajax-title="@IDSync.Resources.HomeTexts.Group_Access - IDSync+" ajax="true" ajax-target=".x-right" url-push="true" href="#!/AuthGroup/Index">@IDSync.Resources.HomeTexts.Group_Access</a></li>
+                    </ul>
+                </li>
+                }
+            }
+            <li>
+                <a href="#"><i class="fa fa-question-circle"></i> <span class="nav-label">@IDSync.Resources.HomeTexts.Help </span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a ajax-title="Help - IDSync+" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Help/Index">Guide</a>
+                    </li>
+                    <li><a ajax-title="Help - Api's" ajax="true" ajax-target=".x-right" url-push="true" href="#!/Api/Index">API's</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<input type="hidden" name="text-skype" />
+<input type="hidden" name="text-exchange" />
+<input type="hidden" name="text-sharepoint" />
+<script type="text/javascript">
+    function scroll_menus() {
+        $('#side-menu').slimScroll({
+            position: 'left',
+            color: '#555',
+            size: '5px', 
+            height: $('body').height() + 'px',
+            alwaysVisible: true
+        });
+    }
+    $(document).ready(function () {
+        scroll_menus();
+        $('body').resize(function () {
+            scroll_menus();
+        });
+    }); 
+    $(function () {
+        var d = new Date();
+        var id = d.getTime();
+        var ul = $('#pp-drop a');
+
+        $('#pp-drop-x a').click(function () {
+            $(this).parent().find('input').click();
+        });
+
+        $('#pp-upload-x').fileupload({
+            dropZone: $('#pp-drop-x'),
+            limitMultiFileUploads: '1',
+            dataType: 'json',
+            submit: function (e, data) {
+                var ext = data.files[0].type;
+                if (!ext.match(/png|gif|jpg|jpeg/gi)) {
+                    $('li#' + id).remove();
+                    notive('Only png|gif|jpg|jpeg files are allowed');
+                    return false;
+                    data.stop();
+
+                } else {
+                    return true;
+                }
+            },
+            add: function (e, data) {
+
+                var tpl = $('<li id="' + id + '" style="padding:20px 0; text-align:center;list-style:none;"><input type="text" value="0" data-width="48" data-height="48"' +
+                        ' data-fgColor="#50b7dc" data-readOnly="1" data-bgColor="#279ac2" /><p></p><span></span></li>');
+                data.context = tpl.appendTo(ul);
+                tpl.find('input').knob();
+                tpl.find('span').click(function () {
+                    if (tpl.attr('id', id)) {
+                        ppXHR.abort();
+                    }
+                    tpl.fadeOut(function () {
+                        tpl.remove();
+                    });
+                });
+                var ppXHR = data.submit();
+            },
+            progress: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                data.context.find('input').val(progress).change();
+            },
+            fail: function (e, data) {
+                data.context.addClass('error');
+            },
+            success: function (rs) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Account/SetPhoto",
+                    data: "userName=@User.Identity.Name&photo=" + rs,
+                    success: function (msg) {
+                        $('li#' + id).remove();
+                        $('#top-imagex').attr('src', '/' + rs);
+                        $('.pp-small').find('img').attr('src', '/' + rs);
+                    }
+                });
+            }
+        });
+        $(document).on('drop dragover', function (e) {
+            e.preventDefault();
+        });
+
+    });
+</script>    
