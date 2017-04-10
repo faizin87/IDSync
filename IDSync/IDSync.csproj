@@ -240,7 +240,10 @@
     <Compile Include="Helpers\CookiesHelper.cs" />
     <Compile Include="Helpers\CryptHelpers.cs" />
     <Compile Include="Helpers\DateHelpers.cs" />
+    <Compile Include="Helpers\ExchangeHelper.cs" />
     <Compile Include="Helpers\LabelHelper.cs" />
+    <Compile Include="Helpers\SharePointHelper.cs" />
+    <Compile Include="Helpers\SkypeHelper.cs" />
     <Compile Include="Helpers\SQLHelpers.cs" />
     <Compile Include="Helpers\StringHelpers.cs" />
     <Compile Include="Interface\IUsersRepository.cs" />
