@@ -174,4 +174,33 @@ namespace IDSync.ApiModels
         public string DistinguishedName { get; set; }
         public string Name { get; set; }
     }
+
+
+    public class GroupCreateModel
+    {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description { get; set; }
+    }
+
+    public class ServiceCountModel {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ActiveDirectory { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Exchange { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Skype { get; set; }
+    }
 }

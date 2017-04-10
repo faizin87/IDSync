@@ -30,7 +30,7 @@ namespace IDSync.Helpers
             var tokenServiceUrl = Startup.apiUrl + "api/v1/Ex/Save";
             var client = new HttpClient();
             List<KeyValuePair<string, string>> keyValues = new List<KeyValuePair<string, string>>(); 
-            keyValues.Add(new KeyValuePair<string, string>("UserPrincipalName",Model.UserPrincipalName)); 
+            keyValues.Add(new KeyValuePair<string, string>("SamAccountName", Model.SamAccountName)); 
             keyValues.Add(new KeyValuePair<string, string>("Database",Model.Database)); 
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CookiesHelper.getCookies("Token"));
