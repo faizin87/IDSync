@@ -70,29 +70,25 @@ namespace IDSync.Helpers
             return "Error";
         }
 
-        //public static List<GroupPrincipal> GetGroups(string userName)
-        //{
-        //    List<GroupPrincipal> result = new List<GroupPrincipal>();
+        public static async Task<List<initGroup>> GetUserGroupsByUserPrincipalName(string Upn)
+        {
+            var tokenServiceUrl = Startup.apiUrl + "api/v1/Ad/"+ Upn + "/GroupMembers";
+            var client = new HttpClient(); 
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", CookiesHelper.getCookies("Token")); 
 
-        //    // establish domain context
-        //    PrincipalContext yourDomain = GetPrincipalContextDomain();
-
-        //    // find your user
-        //    UserPrincipal user = UserPrincipal.FindByIdentity(yourDomain, userName);
-
-        //    if (user != null)
-        //    {
-        //        // get the user's groups
-        //        var groups = user.GetAuthorizationGroups();
-
-        //        foreach (GroupPrincipal group in groups)
-        //        {
-        //            result.Add((GroupPrincipal)group);
-        //        }
-        //    }
-
-        //    return result;
-        //}
+            HttpResponseMessage response = await client.GetAsync(tokenServiceUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                string[] dataGroups = (await response.Content.ReadAsStringAsync()).Split('#');
+                List<initGroup> initGroups = new List<initGroup>(); 
+                foreach (var group in dataGroups)
+                {
+                    initGroups.Add(new initGroup { Name = group });
+                }
+                return initGroups;
+            }
+            return null;
+        }
         //public static PrincipalContext GetPrincipalContext(string OU)
         //{
         //    return new PrincipalContext(ContextType.Domain, Configs.MainConfig.Conf("AdDomain"), OU + "," + Configs.MainConfig.Conf("AdOU"), Configs.MainConfig.Conf("AdAccount"), Configs.MainConfig.Conf("AdPassword"));
