@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations; 
+using System.ComponentModel.DataAnnotations; 
 
 namespace IDSync.ApiModels
 {
@@ -13,6 +13,15 @@ namespace IDSync.ApiModels
         public string DistinguishedName { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
+        public string RegistrarPool { get; set; }
+    }
+
+    public class SkypeSaveModel
+    {
+        [Key]
+        [Required(ErrorMessage = "SamAccountName is required")]
+        [StringLength(256, MinimumLength = 0, ErrorMessage = "SamAccountName must be between 0 and 256 characters.")]
+        public string SamAccountName { get; set; }
         public string RegistrarPool { get; set; }
     }
 }
